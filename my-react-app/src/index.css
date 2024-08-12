@@ -1,0 +1,54 @@
+body{
+  margin:0px 50px;
+}
+
+
+/* -----------------css for card component--------------------- */
+.card{
+  border:2px solid gray;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px gray;
+  margin: 10px;
+  padding: 20px;
+  max-width: 230px;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+  flex-wrap: wrap;
+}
+
+.card:hover{
+  transform: scale(1.01);
+  box-shadow: 10px 10px 10px gray;
+}
+.card > img{
+  width: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;  
+}
+.card >span{
+  text-align: center;
+}
+/* -----------------css for button component--------------------- */
+.btn {
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  color: aliceblue;
+  border: none; 
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  margin: 10px;
+}
+
+.btn:hover {
+  background: linear-gradient(45deg, #FF8E53 30%, #FE6B8B 90%);
+  box-shadow: 5px 5px 5px gray;
+  transform: scale(1.07);
+}
