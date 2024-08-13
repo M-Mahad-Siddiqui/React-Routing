@@ -1,7 +1,52 @@
 body{
   margin:0px 50px;
+  margin-top: 80px;
 }
 
+/* Assuming you have a file named styles.css */
+.nav {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    position: fixed;
+    min-width: 98%;
+    height: 50px; /* Define a fixed height for the navbar */
+    border-radius: 5px;
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* Ensure it's above other content */
+}
+@media (max-width: 600px) {
+    .nav {
+        width: 90%;
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    body {
+        padding-top: 10px; /* Adjust as needed */
+    }
+}
+
+
+
+.nav li {
+    display: inline;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: inline-block;
+}
+
+.nav a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+}
 
 /* -----------------css for card component--------------------- */
 .card{
@@ -10,7 +55,7 @@ body{
   box-shadow: 5px 5px 5px gray;
   margin: 10px;
   padding: 20px;
-  max-width: 230px;
+  max-width: 220px;
   display: inline-block;
   justify-content: center;
   align-items: center;
@@ -45,10 +90,67 @@ body{
   cursor: pointer;
   transition: all 0.5s ease-in-out;
   margin: 10px;
+  display: flex;
 }
 
 .btn:hover {
   background: linear-gradient(45deg, #FF8E53 30%, #FE6B8B 90%);
   box-shadow: 5px 5px 5px gray;
   transform: scale(1.07);
+}
+/* -----------------footer------------------------------------------ */
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 44px;
+  border-top: 0.1px solid rgb(83, 138, 226);
+  text-align: center;
+  padding: 10px;
+  z-index: 1000;
+  padding: 1px;
+}
+/* ---------------------students--------------------------- */
+.info{
+  text-align: center;
+  margin: 20px;
+  color: #FE6B8B;
+  display: block;
+  width:100% ;
+}
+.student{
+  font-family: monospace;
+  font-size: large;
+  padding-left: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(2px , 4fr));
+  flex-wrap: wrap;
+  width: 500px;
+background-color: #e7ad78;
+border-radius: 10px;
+margin: 0 auto;
+box-shadow: 5px 5px 5px gray;
+}
+/* --------------------login--------------------------------------- */
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  color: #e7ad78;
+  text-shadow: 2px 2px 1px  #FE6B8B;
+}
+.notLogin{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  color:white;
+  background:rgb(233, 143, 143);
+  border-radius: 5px;
+  text-shadow: 0px 0px 10px  #f07000;
 }
