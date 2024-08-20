@@ -69,7 +69,7 @@ body{
   box-shadow: 10px 10px 10px gray;
 }
 .card > img{
-  width: 200px;
+  width: 190px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -153,4 +153,31 @@ box-shadow: 5px 5px 5px gray;
   background:rgb(233, 143, 143);
   border-radius: 5px;
   text-shadow: 0px 0px 10px  #f07000;
+}
+  /* ----------------------list------------------------------ */
+.category{
+  margin         : 2px;
+  padding        : 20px;
+  background     : #d6bf73;
+  align-items    : center;
+  display        : flex;
+  justify-content: center;
+  color          : white;
+  font-size      : x-large;
+  border-radius  : 7px;
+}
+.list{
+  list-style    : none;
+  display       : flex;
+  flex-direction: column;
+  font-size     : larger;
+  padding       : 10px;
+}
+.list li:hover{
+  background-color: #e7ad78;
+  border-radius   : 4px;
+  box-shadow      : 5px 5px 5px gray;
+  cursor          : pointer;
+  transform       : scale(1.01);
+  color: antiquewhite;
 }
