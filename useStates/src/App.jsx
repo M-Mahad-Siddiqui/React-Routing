@@ -5,17 +5,17 @@ import Form from './components/Form';
 
 function App() {
 	const [user, setUser] = useState({
-		name: '',
-		lastName: '',
-		email: '',
+		name      : '',
+		lastName  : '',
+		email     : '',
 		rollNumber: '',
-		gender: ''
+		gender    : ''
 	});
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setUser((prevUser) => ({
-			...prevUser,
+					...prevUser,
 			[name]: value
 		}));
 	};

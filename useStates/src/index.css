@@ -81,7 +81,7 @@ button:focus, button:focus-visible {
 }
 
 .container > button {
-	margin: 10px;
+	margin-top: 20px;
 }
 
 #gender {
@@ -92,10 +92,11 @@ button:focus, button:focus-visible {
 
 .display {
 	margin-left: 10rem;
+	min-width: 450px;
 }
 
 .display > span {
-	margin: 20px;
-	font-size: 1.5rem;
+	margin    : 25px;
+	font-size : 1.5rem;
 	text-align: left !important;
 }
