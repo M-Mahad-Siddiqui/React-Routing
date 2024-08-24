@@ -11,7 +11,11 @@ export default function ProfilePicture() {
 
     return (
     <>
-            <h1>Profile Picture</h1>
+        <b style={{
+          fontSize: '30px',
+          margin  : '10px',
+          display : 'block'
+            }}>Profile Picture</b>
             <img onClick = {(e)=>{handleClick(e)}} src = {imageUrl} alt = "Profile Picture" />
     </>
   )

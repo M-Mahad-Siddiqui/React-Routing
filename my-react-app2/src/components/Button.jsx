@@ -12,11 +12,10 @@ export default function Button() {
             console.log(`${name} stop clicking me its to much`);
         }
     }
-
-    const handleEvent = (e) => {
-        console.log(e);
-        e.target.textContent = 'change the text contents';
-    }
+    
+  const handleEvent = (e) => {
+		e.target.textContent = e.target.textContent === 'Events handler' ? 'change the text contents' : 'Events handler';
+	};
 
     return (
         <>
