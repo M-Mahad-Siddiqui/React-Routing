@@ -18,7 +18,6 @@ body {
 	justify-items: center;
 	align-items: stretch;
 	width: 100%;
-	max-width: 1200px;
 }
 
 .card {
@@ -106,4 +105,54 @@ body {
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
+}
+
+/* ------------------------header input------------------------------------- */
+.searchGallery {
+	box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.6);
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	background: white;
+}
+
+.searchGallery b {
+	color: white;
+	text-shadow: 0px 0px 10px #d21d48;
+	font-size: 3rem;
+	background: linear-gradient(to right, #4ebba3, #6dd965);
+	display: inline-block;
+	width: 100%;
+	padding: 20px 0;
+	border-radius: 7px;
+}
+
+.head {
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search {
+	margin: 0px 10px;
+	border: none;
+	width: 90rem;
+	height: 30px;
+	font-size: 1.7rem;
+	padding: 10px 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #711261;
+	cursor: pointer;
+}
+
+#priority {
+	margin       : 0px 10px;
+	border       : none;
+	width        : 13rem;
+	font-size    : 1rem;
+	padding      : 10px 20px;
+	border-radius: 8px;
+	box-shadow   : 0px 0px 8px #b20988;
+	cursor       : pointer;
 }
