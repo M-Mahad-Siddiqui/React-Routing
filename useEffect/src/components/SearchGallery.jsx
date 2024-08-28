@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './SearchGallery.css'; // Assume styles are moved to SearchGallery.css
+import './SearchGallery.css'; // Styles are moved to SearchGallery.css
 
 export default function SearchGallery() {
 	const [search, setSearch] = useState('');     // hold user input search value
@@ -14,7 +14,7 @@ export default function SearchGallery() {
 
 	// for filter card by search and priority
 	const filteredArr = post.filter(
-		(data) =>
+		(data) => 
 			data.title.toLowerCase().includes(search.toLowerCase()) && data.category.toLowerCase().includes(priority.toLowerCase())
 	);
 	// Ensure category matching works even if priority is empty
