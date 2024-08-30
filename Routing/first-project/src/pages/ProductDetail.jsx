@@ -1,45 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-export default function ProductDetails() {
+function ProductDetail() {
+	const { id } = useParams();
+	const [product, setProduct] = useState(null);
 
-    const { loading, setLoading } = useState(true);
-    const { product, setProduct } = useState(null);
-    const { id } = useParams();
+	useEffect(() => {
+		fetch(`https://fakestoreapi.com/products/${id}`)
+			.then((res) => res.json())
+			.then((data) => setProduct(data));
+	}, [id]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    useEffect(() => {
-
-
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-                const data = await response.json();
-                setProduct(data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
-
-
-    return (
-        <div className="ProductInfo">
-
-            {product ? (
-                <div>
-                    <img src={product.image} alt={product.title} />
-                    <h1>{product.title}</h1>
-                    <p>{product.description}</p>
-                    <p>Category: {product.category}</p>
-                    <p>Price   : ${product.price}</p>
-                </div>
-            ) : null}
-        </div>
-    )
+	console.log(product);
+	return (
+		<div className = "m-14 flex flex-col justify-center items-center">
+		<h1  className = "text-4xl"> Product Detail</h1>
+			{product ? (
+				<div className="m-14 w-1/2 flex flex-col justify-center items-center">
+					<img className="h-52 w-52" src={product.image} />
+					<h1 className="my-3 text-center  text-4xl underline font-semibold">{product.title}</h1>
+				</div>
+			) : null}
+		</div>
+	);
 }
+
+export default ProductDetail;

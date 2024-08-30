@@ -1,0 +1,73 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	box-shadow: 0 0 10px black;
+	width: 50rem;
+	margin-top: 3rem;
+	border-radius: 7px;
+	padding: 9px;
+	border: none;
+	position: relative;
+}
+
+.container > h2 {
+	font-size: 2.2rem;
+	margin: 5px;
+}
+
+.container > img {
+	width: 200px;
+}
+
+.container > p:first-of-type {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 5px;
+}
+
+.container > p:nth-of-type(2) {
+	font-size: .9rem;
+}
+
+.container > p:nth-of-type(3) {
+	font-weight     : 700;
+	background-color: #1b1a1a;
+	color           : aliceblue;
+	padding         : 3px 10px;
+	border-radius   : 5px;
+	transition      : transform 0.3s ease;  /* Smooth transition for transform changes */
+}
+
+.container > p:nth-of-type(3):hover {
+	transform: scale(1.1);     /* Scale the element to 110% of its original size */
+}
+
+.container > p:last-of-type {
+	font-size: 1.2rem;
+	color: rgb(207, 24, 24);
+}
+
+.container > p {
+	margin: 3px;
+}
+
+.container > button {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: rgb(60, 56, 56);
+	color: aliceblue;
+}
+
+.container > button:hover {
+	background-color: white;
+	color: rgb(60, 56, 56);
+	border: none;
+	cursor: pointer;
+	box-shadow: 0 0 10px rgb(126, 24, 24);
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+	transition-duration: 1s;
+	font-weight: bolder;
+}
