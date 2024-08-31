@@ -11,11 +11,12 @@ const Home = () => {
 		const fetchData = async () => {
 			try {
 				const response = await fetch("https://fakestoreapi.com/products");
+				if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
 				const data = await response.json();
 				setData(data); // Store the fetched data in state
-				setLoading(false); // Set loading to false after data is fetched
 			} catch (error) {
 				console.error("Error fetching data:", error);
+			} finally {
 				setLoading(false);
 			}
 		};
@@ -25,6 +26,10 @@ const Home = () => {
 
 	if (loading) {
 		return <div>Loading...</div>; // Show a loading message while data is being fetched
+	}
+
+	if(data.length === 0 || !data) {
+		return <div>No data available</div>;
 	}
 
 	const handleCardClick = (id) => {
