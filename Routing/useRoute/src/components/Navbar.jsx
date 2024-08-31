@@ -5,9 +5,11 @@ export default function Navbar() {
 	return (
 		<div className="Navbar">
 			<h3>Welcome</h3>
-			<Link to="/">Home</Link>
-			<Link to="/About">About</Link>
-			<Link to="/contact">Contact</Link>
+			{/* this link do nothing only just add the value to the url */}
+			<Link to = "/">Home</Link>
+			<Link to = "/ABOUT">About</Link>
+			<Link to = "/CONTACT">Contact</Link>
+			<Link to = "/PHONE">Phone</Link>
 		</div>
 	);
 }

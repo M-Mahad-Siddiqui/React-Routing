@@ -13,9 +13,10 @@ function App() {
 
 			<Routes>
 				<Route path = "/" element            = {<Home />} />
-				<Route path = "/About" element       = {<About />} />
+				<Route path = "/about" element       = {<About />} />
 				<Route path = "/product/:id" element = {<ProductDetail />} />
 				<Route path = "*" element            = {<NotFound />} />
+				<Route path = "/phone" element       = {<h1>i am phone !</h1>} />
 			</Routes>
 		</BrowserRouter>
 	);

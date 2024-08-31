@@ -1,0 +1,41 @@
+.nav {
+	display         : flex;
+	box-sizing      : border-box;
+	justify-content : space-around;
+	align-items     : center;
+	padding         : 0.5rem;
+	margin          : 1rem 0;
+	background-color: #bfb9b9;
+	border-radius   : 5px;
+	box-shadow      : 0 2px 8px rgba(0, 0, 0, 0.26);
+	width           : 100%;
+	max-width       : 1200px;                         /* Optional: Max width for larger screens */
+	margin-left     : auto;                           /* Center the nav on larger screens */
+	margin-right    : auto;                           /* Center the nav on larger screens */
+	position        : fixed;
+	top             : 0.4rem;
+	left            : 1rem;
+}
+
+.nav a {
+	text-decoration: none;         /* Remove underline from links */
+	color          : #000;         /* Text color */
+	padding        : 0.5rem 5rem;  /* Padding around links */
+	border-radius  : 4px;          /* Rounded corners for links */
+}
+
+.nav a:hover {
+	background-color: #e0e0e0;     /* Light background on hover */
+}
+
+@media (max-width:768px) {
+	.nav {
+		flex-direction: column;         /* Stack links vertically on small screens */
+		align-items: flex-start;         /* Align items to the start */
+	}
+
+	.nav a {
+		padding: 1rem;         /* Increase padding for easier clicking on small screens */
+	}
+
+}

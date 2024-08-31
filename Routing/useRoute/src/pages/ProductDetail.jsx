@@ -21,7 +21,7 @@ export default function ProductDetail() {
     };
 
     fetchData();
-  }, [id]); // Dependency array includes 'id' to re-run the effect when the id changes
+  }, [id]);  // Dependency array includes 'id' to re-run the effect when the id changes
 
   if (loading) {
     return <div>Loading...</div>;

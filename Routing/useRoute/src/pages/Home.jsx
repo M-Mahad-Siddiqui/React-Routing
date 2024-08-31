@@ -29,6 +29,7 @@ const Home = () => {
 
 	const handleCardClick = (id) => {
 		navigate(`/product/${id}`); // Programmatically navigate to the ProductDetail page
+	//  window.location.href = `/product/${post.id}`;
 	};
 
 	let cards = data.map((item) => (

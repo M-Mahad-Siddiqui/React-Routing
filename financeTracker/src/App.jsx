@@ -1,13 +1,25 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import './App.css';
+import Nav from './components/Nav';
+import About from './pages/About';
+import Home from './pages/Home';
+import PageNoFound from './pages/PageNoFound';
+import ProductDetail from './pages/ProductDetail';
 
-import './App.css'
 
 function App() {
+  return <BrowserRouter>
+  
+    <Nav/>
+    <Routes>
+      <Route path = "/" element            = {<Home/>} />
+      <Route path = "/about" element       = {<About/>} />
+      <Route path = "/product/:id" element = {<ProductDetail/>} />
+      <Route path = "*" element            = {<PageNoFound/>} />
 
-  return (
-    <div>
-      <h1>hello react</h1>
-    </div>
-  )
+    </Routes>
+    
+  </BrowserRouter>;
 }
 
-export default App
+export default App;
