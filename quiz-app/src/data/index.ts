@@ -1,6 +1,6 @@
-import data from "../data/questions.json";
-import { IQuestion } from "../types";
 import { shuffleArr } from "../helpers";
+import { IQuestion } from "../types";
+import data from "./questions.json";
 
 export const totalQuestions = data.length;
 

@@ -1,21 +1,17 @@
 import React from "react";
-
 export default function MyTodo() {
 	const [todo, setTodo] = React.useState(["Eat Food", "Workout", "Sleep"]);
-
-	const addTodo = (value) => {
-		setTodo([...todo, value]);
-	};
+	const [todoInput, setTodoInput] = React.useState(''); // State for the input field
 
 	const deleteTodo = () => {
 		setTodo([]);
 	};
 
 	const handleAddTodo = () => {
-		const todoInput = document.getElementById("todoInput");
-		if (todoInput.value === "") return;
-		addTodo(todoInput.value);
-		todoInput.value = ""; // Clear the input field
+		if (todoInput.trim() === "") return; // Avoid adding empty todos
+		// setTodo([...todo, todoInput]);
+		setTodo((prevTodo) => [...prevTodo, todoInput]); // Update the todo list
+		setTodoInput(''); // Clear the input field using React state
 	};
 
 	const removeTodo = (index) => {
@@ -28,6 +24,24 @@ export default function MyTodo() {
 	const editTodo = (index) => {
 		const newTodos = [...todo];
 		newTodos[index] = prompt("Enter new todo");
+		setTodo(newTodos);
+	};
+
+	const moveUp = (index) => {
+		if (index === 0) return;
+		const newTodos = [...todo];
+		const temp = newTodos[index - 1];
+		newTodos[index - 1] = newTodos[index];  // swap two elements
+		newTodos[index] = temp;
+		setTodo(newTodos);
+	};
+
+	const moveDown = (index) => {
+		if (index === todo.length - 1) return;
+		const newTodos = [...todo];
+		const temp = newTodos[index + 1];
+		newTodos[index + 1] = newTodos[index];
+		newTodos[index] = temp;
 		setTodo(newTodos);
 	};
 
@@ -95,7 +109,7 @@ export default function MyTodo() {
 				}
 			`}</style>
 			<h2>My Todo List</h2>
-			<input type="text" id="todoInput" placeholder="Add Todo" />
+			<input type="text" value={todoInput} onChange={(e) => setTodoInput(e.target.value)} placeholder="Add Todo" />
 			<button onClick={handleAddTodo}>Add Todo</button>
 			<button onClick={deleteTodo}>Delete All Todos</button>
 			<ul>
@@ -103,6 +117,8 @@ export default function MyTodo() {
 					<li key={index}>
 						{todo}
 						<div>
+							<button onClick={() => moveUp(index)}>move up</button>
+							<button onClick={() => moveDown(index)}>move down</button>
 							<button onClick={() => editTodo(index)}>Edit</button>
 							<button onClick={() => removeTodo(index)}>Remove</button>
 						</div>

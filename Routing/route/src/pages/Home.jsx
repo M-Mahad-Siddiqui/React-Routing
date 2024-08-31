@@ -26,7 +26,7 @@ export default function Home() {
 	}, []);
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <div>Loading... wait kr bahi thura waqt lagy ga</div>;
 	}
 
 	if (!post) {

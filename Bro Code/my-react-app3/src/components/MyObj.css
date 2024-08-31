@@ -1,0 +1,29 @@
+.car-container {
+	display       : flex;
+	flex-direction: column;
+	align-items   : center;
+	margin-top    : 20px;
+	box-shadow    : 0 0 10px rgba(0, 0, 0, 0.8);
+	padding       : 20px;                         /* max-width     : min-content; */
+	width         : 30rem;
+	margin        : 1rem auto;
+	border-radius : 7px;
+}
+
+.car-container > input {
+	margin-bottom: 0.5rem;
+	width: 100%;
+}
+
+.car-container > button {
+	width: 100%;
+}
+
+.car-container > ul {
+	width: 100%;
+}
+
+.car-container > ul > li {
+	cursor: pointer;
+	padding: 0.5rem;
+}
