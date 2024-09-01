@@ -1,36 +1,36 @@
-
-import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRef, useState } from 'react';
-
-
-    // handle login and signup effectivly
+import React, { useEffect } from 'react';
 
 function Login() {
-	const [isLoginMode, setIsLoginMode] = useState(true);
-	const bannerRef = useRef(null);
-	const loginContainerRef = useRef(null);
-	const signupContainerRef = useRef(null);
+  useEffect(() => {
+    const banner = document.getElementById('banner');
+    const loginContainer = document.getElementById('login-container');
+    const signupContainer = document.getElementById('signup-container');
+    const loginToggle = document.getElementById('login-form-toggler');
+    const signupToggle = document.getElementById('signup-form-toggler');
 
-	const toggleMode = () => {
-		if (isLoginMode) {
-			bannerRef.current.style.transform = 'translateX(-100%)';
-			loginContainerRef.current.style.transform = 'scale(0)';
-			signupContainerRef.current.style.transform = 'scale(1)';
-		} else {
-			bannerRef.current.style.transform = 'translateX(0)';
-			signupContainerRef.current.style.transform = 'scale(0)';
-			loginContainerRef.current.style.transform = 'scale(1)';
-		}
-		setIsLoginMode(!isLoginMode);
-	};
+    signupToggle.addEventListener('click', () => {
+      banner.style.transform = 'translateX(-100%)';
+      loginContainer.style.transform = 'scale(0)';
+      signupContainer.style.transform = 'scale(1)';
+    });
 
-	return (
-		<div>
-			<style>
-				{" "}
-				{`
+    loginToggle.addEventListener('click', () => {
+      banner.style.transform = 'translateX(0%)';
+      signupContainer.style.transform = 'scale(0)';
+      loginContainer.style.transform = 'scale(1)';
+    });
+
+    // Clean up event listeners on component unmount
+    return () => {
+      signupToggle.removeEventListener('click', () => {});
+      loginToggle.removeEventListener('click', () => {});
+    };
+  }, []);
+
+  return (
+    <div>
+      <style>
+        {`
           *, *::after, *::before {
             margin: 0;
             padding: 0;
@@ -204,103 +204,89 @@ function Login() {
             border-bottom: 2px solid;
           }
 
-            .banner {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              transition: transform 500ms ease;
-            }
-          `}
-  {" "}
-			</style>
-			<div className="form-container">
-				<div className="login-container" ref={loginContainerRef}>
-					<h1 className="title">Log In</h1>
-					<p className="desc">Login to your account to upload or download pictures, videos, music.</p>
+          .banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 500ms ease;
+          }
+        `}
+      </style>
+      <div className="form-container">
+        <div className="login-container" id="login-container">
+          <h1 className="title">Log In</h1>
+          <p className="desc">Login to your account to upload or download pictures, videos, music.</p>
 
-					<div className="input-container">
-						<input type="email" placeholder="Enter Your Email Address" autoFocus />
-					</div>
-					<div className="input-container">
-						<input type="password" placeholder="Enter Your Password" />
-					</div>
-					<div className="account-controls">
-						<a href="#">Forgot Password?</a>
-						<button>
-							Next <FontAwesomeIcon icon={faAngleRight} />
-						</button>
-					</div>
+          <div className="input-container">
+            <input type="email" placeholder="Enter Your Email Address" autoFocus />
+          </div>
+          <div className="input-container">
+            <input type="password" placeholder="Enter Your Password" />
+          </div>
+          <div className="account-controls">
+            <a href="#">Forgot Password?</a>
+            <button>Next <i className="fas fa-angle-right"></i></button>
+          </div>
 
-					<span className="line"></span>
+          <span className="line"></span>
 
-					<span className="other-login-text">Or log in with</span>
+          <span className="other-login-text">Or log in with</span>
 
-					<div className="social-logins">
-						<button className="social-login">
-							<FontAwesomeIcon icon={faFacebookF} style={{ color: '#1e7bf2' }} />
-						</button>
-						<button className="social-login">
-							<FontAwesomeIcon icon={faGoogle} style={{ color: '#e02210' }} />
-						</button>
-					</div>
+          <div className="social-logins">
+            <button className="social-login">
+              <i className="fab fa-facebook-f" style={{ color: '#1e7bf2' }}></i>
+            </button>
+            <button className="social-login">
+              <i className="fab fa-google" style={{ color: '#e02210' }}></i>
+            </button>
+          </div>
 
-					<span className="signup-text">Don't have an account yet?{" "}
-						<a id="signup-form-toggler" onClick={toggleMode}>
-							Sign up
-						</a>
-					</span>
-				</div>
+          <span className="signup-text">Don't have an account yet? <a id="signup-form-toggler" href="#">Sign up</a></span>
+        </div>
 
-				<div className="placeholder-banner" ref={bannerRef}>
-					<img
-						src="https://img.freepik.com/free-vector/man-sitting-desktop-pc-computer-screen_3446-328.jpg?t=st=1725187780~exp=1725191380~hmac=7c280fd3c702a847059e03ba96dfac1b6701e4807ae2df127524e47add940726&w=740"
-						alt="Banner"
-						className="banner"
-					/>
-				</div>
+        <div className="placeholder-banner" id="banner">
+          <img
+            src="https://img.freepik.com/free-vector/man-sitting-desktop-pc-computer-screen_3446-328.jpg?t=st=1725187780~exp=1725191380~hmac=7c280fd3c702a847059e03ba96dfac1b6701e4807ae2df127524e47add940726&w=740"
+            alt="Banner"
+            className="banner"
+          />
+        </div>
 
-				<div className="signup-container" ref={signupContainerRef}>
-					<h1 className="title">Signup</h1>
+        <div className="signup-container" id="signup-container">
+          <h1 className="title">Signup</h1>
 
-					<p className="desc">Create your account to upload or download pictures, videos, music.</p>
+          <p className="desc">Create your account to upload or download pictures, videos, music.</p>
 
-					<div className="input-container">
-						<input type="email" placeholder="Enter Your Email Address" />
-					</div>
+          <div className="input-container">
+            <input type="email" placeholder="Enter Your Email Address" />
+          </div>
 
-					<div className="input-container">
-						<input type="password" placeholder="Enter Your Password" />
-					</div>
+          <div className="input-container">
+            <input type="password" placeholder="Enter Your Password" />
+          </div>
 
-					<div className="account-controls">
-						<button>
-							Next <FontAwesomeIcon icon={faAngleRight} />
-						</button>
-					</div>
+          <div className="account-controls">
+            <button>Next <i className="fa fa-angle-right"></i></button>
+          </div>
 
-					<span className="line"></span>
+          <span className="line"></span>
 
-					<span className="other-login-text">Or Sign up with</span>
+          <span className="other-login-text">Or Sign up with</span>
 
-					<div className="social-logins">
-						<button className="social-login">
-							<FontAwesomeIcon icon={faFacebookF} style={{ color: '#1e7bf2' }} />
-						</button>
-						<button className="social-login">
-							<FontAwesomeIcon icon={faGoogle} style={{ color: '#ea4335' }} />
-						</button>
-					</div>
+          <div className="social-logins">
+            <button className="social-login">
+              <i className="fab fa-facebook-f" style={{ color: '#1e7bf2' }}></i>
+            </button>
+            <button className="social-login">
+              <i className="fab fa-google" style={{ color: '#ea4335' }}></i>
+            </button>
+          </div>
 
-					<span className="signup-text">
-						Already have an account?{" "}
-						<a id="login-form-toggler" onClick={toggleMode}>
-							Login here
-						</a>
-					</span>
-				</div>
-			</div>
-		</div>
-	);
+          <span className="signup-text">Already have an account? <a id="login-form-toggler" href="#">Login here</a></span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

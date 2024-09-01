@@ -1,18 +1,23 @@
-
-import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+                                // import { faAngleRight, faFacebookF, faGoogle } from '@fortawesome/free-solid-svg-icons';
+                                // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    signInWithEmailAndPassword
+} from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useRef, useState } from 'react';
-import { createUserWithEmailAndPassword, db, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from '../firebase/firebase.js';
-
-    // handle login and signup animation
+import { db } from '../firebase/firebase.js';
 
 function Login() {
 	const [isLoginMode, setIsLoginMode] = useState(true);
 	const bannerRef = useRef(null);
 	const loginContainerRef = useRef(null);
 	const signupContainerRef = useRef(null);
+
+	const [email, setEmail]       = useState('');
+	const [password, setPassword] = useState('');
+	const [name, setName]         = useState('');
 
 	const toggleMode = () => {
 		if (isLoginMode) {
@@ -25,36 +30,32 @@ function Login() {
 			loginContainerRef.current.style.transform = 'scale(1)';
 		}
 		setIsLoginMode(!isLoginMode);
-  };
-  // handle login and signup effectivly
-const {email , setEmail}       = useState('');
-const {password , setPassword} = useState('');
-const {name, setName}          = useState('');
+	};
 
-  const handleLogin = async (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault();
-    try {
-      if (name) {
-        await createUserWithEmailAndPassword(email, password);
-        console.log("user sucessfully signUp : with email ", user.email);
-        await setDoc(doc(db, 'users', user.uid), {
-          name : name,
-          email: user.email,
-          password: password
-        });
-        window.location.href = '/home';
-      } else {
-        await signInWithEmailAndPassword(email, password);
-        await signInWithPopup(GoogleAuthProvider);
-      }
-			const user = getAuth().currentUser;
-			console.log("user: ", user);
-      console.log("user sucessfully login: with email ", user.email);
-      window.location.href = '/home';
+		const auth = getAuth();
+		try {
+			if (!isLoginMode && name) {
+				const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+				const user = userCredential.user;
+				await setDoc(doc(db, 'users', user.uid), {
+					name,
+					email: user.email,
+					password,
+				});
+				console.log("User successfully signed up:", user.email);
+				window.location.href = '/home';
+			} else {
+				await signInWithEmailAndPassword(auth, email, password);
+				console.log("User successfully logged in:", auth.currentUser.email);
+				window.location.href = '/home';
+			}
 		} catch (error) {
-			console.log("sorry ustad you get Error: ", error);
+			console.error("Error during authentication:", error);
 		}
 	};
+
 	return (
 		<div>
 			<style>
@@ -239,101 +240,109 @@ const {name, setName}          = useState('');
               object-fit: cover;
               transition: transform 500ms ease;
             }
-          `}
-  {" "}
-      </style>
-      <form id="login-form" onSubmit={handleLogin}>
-			<div className="form-container">
-				<div className="login-container" ref={loginContainerRef}>
-					<h1 className="title">Log In</h1>
-					<p className="desc">Login to your account to upload or download pictures, videos, music.</p>
-
-					<div className="input-container">
-						<input type="email" placeholder="Enter Your Email Address" autoFocus  onChange={(e) => setEmail(e.target.value)} required/>
+          `}{" "}
+			</style>{" "}
+			<form onSubmit  = {handleLogin}>
+			<div  className = "form-container">
+			<div  className = "login-container" ref                                       = {loginContainerRef}>
+			<h1   className = "title">Log In</h1>
+			<p    className = "desc">Login to your account to upload or download pictures, videos, music.</p>
+			<div  className = "input-container">
+							<input
+								type="email"
+								placeholder="Enter Your Email Address"
+								onChange={(e) => setEmail(e.target.value)}
+								required
+							/>
+						</div>
+						<div className="input-container">
+							<input
+								type="password"
+								placeholder="Enter Your Password"
+								onChange={(e) => setPassword(e.target.value)}
+								required
+							/>
+						</div>
+						<div className="account-controls">
+							<a href="#" onClick={() => alert("Provide info to reset your password.")}>
+								Forgot Password?
+							</a>
+                            <button>
+                                by
+								{/* Next <FontAwesomeIcon icon={faAngleRight} /> */}
+							</button>
+						</div>
+						<span className="line"></span>
+						<span className="other-login-text">Or log in with</span>
+						<div className="social-logins">
+							{/* <button className="social-login">
+								<FontAwesomeIcon icon={faFacebookF} style={{ color: '#1e7bf2' }} />
+							</button>
+							<button className="social-login">
+								<FontAwesomeIcon icon={faGoogle} style={{ color: '#e02210' }} />
+							</button> */}
+						</div>
+						<span className="signup-text">
+							Don't have an account?{" "}
+							<a id="signup-form-toggler" onClick={toggleMode}>
+								Sign up
+							</a>
+						</span>
 					</div>
-					<div className="input-container">
-						<input type="password" placeholder="Enter Your Password" onChange={(e) => setPassword(e.target.value)} required/>
+					<div className="placeholder-banner" ref={bannerRef}>
+						<img
+							src="https://img.freepik.com/free-vector/man-sitting-desktop-pc-computer-screen_3446-328.jpg"
+							alt="Banner"
+							className="banner"
+						/>
 					</div>
-					<div className = "account-controls">
-					<a   href      = "#" onClick = {() =>alert("you did not provide enough information to reset your password")}>Forgot Password?</a>
-						<button>
-							Next <FontAwesomeIcon icon={faAngleRight} />
-						</button>
+					<div className="signup-container" ref={signupContainerRef}>
+						<h1 className="title">Signup</h1>
+						<p className="desc">Create your account to upload or download pictures, videos, music.</p>
+						<div className="input-container">
+							<input type="text" placeholder="Enter Your Name" onChange={(e) => setName(e.target.value)} required />
+						</div>
+						<div className="input-container">
+							<input
+								type="email"
+								placeholder="Enter Your Email Address"
+								onChange={(e) => setEmail(e.target.value)}
+								required
+							/>
+						</div>
+						<div className="input-container">
+							<input
+								type="password"
+								placeholder="Enter Your Password"
+								onChange={(e) => setPassword(e.target.value)}
+								required
+							/>
+						</div>
+						<div className="account-controls">
+                            <button>
+                                hy
+								{/* Next <FontAwesomeIcon icon={faAngleRight} /> */}
+							</button>
+						</div>
+						<span className="line"></span>
+						<span className="other-login-text">Or Sign up with</span>
+						<div className="social-logins">
+							{/* <button className="social-login"> */}
+								{/* <FontAwesomeIcon icon={faFacebookF} style={{ color: '#1e7bf2' }} /> */}
+							{/* </button> */}
+							{/* <button className="social-login"> */}
+								{/* <FontAwesomeIcon icon={faGoogle} style={{ color: '#ea4335' }} /> */}
+							{/* </button> */}
+						</div>
+						<span className="signup-text">
+							Already have an account?{" "}
+							<a id="login-form-toggler" onClick={toggleMode}>
+								Login here
+							</a>
+						</span>
 					</div>
-
-					<span className="line"></span>
-
-					<span className="other-login-text">Or log in with</span>
-
-					<div className="social-logins">
-						<button className="social-login">
-							<FontAwesomeIcon icon={faFacebookF} style={{ color: '#1e7bf2' }} />
-						</button>
-						<button className="social-login">
-							<FontAwesomeIcon icon={faGoogle} style={{ color: '#e02210' }} />
-						</button>
-					</div>
-
-					<span className="signup-text">Don't have an account yet?{" "}
-						<a id="signup-form-toggler" onClick={toggleMode}>
-							Sign up
-						</a>
-					</span>
 				</div>
-
-				<div className="placeholder-banner" ref={bannerRef}>
-					<img
-						src="https://img.freepik.com/free-vector/man-sitting-desktop-pc-computer-screen_3446-328.jpg?t=st=1725187780~exp=1725191380~hmac=7c280fd3c702a847059e03ba96dfac1b6701e4807ae2df127524e47add940726&w=740"
-						alt="Banner"
-						className="banner"
-					/>
-				</div>
-
-				<div className="signup-container" ref={signupContainerRef}>
-					<h1 className="title">Signup</h1>
-
-					<p className="desc">Create your account to upload or download pictures, videos, music.</p>
-
-						<div   className = "input-container">
-						<input type      = "text" placeholder = "Enter Your Name " autoFocus onChange={(e) => setName(e.target.value)} required />
-					</div>
-                    
-					<div className="input-container">
-						<input type="email" placeholder="Enter Your Email Address" onChange={(e) => setEmail(e.target.value)} required />
-					</div>
-
-					<div   className = "input-container">
-					<input type      = "password" placeholder = "Enter Your Password" onChange = {(e) => setPassword(e.target.value)}  required/>
-					</div>
-
-					<div className="account-controls">
-						<button>
-							Next <FontAwesomeIcon icon={faAngleRight} />
-						</button>
-					</div>
-
-					<span className="line"></span>
-
-					<span className="other-login-text">Or Sign up with</span>
-
-					<div             className = "social-logins">
-					<button          className = "social-login">
-					<FontAwesomeIcon icon      = {faFacebookF} style = {{ color: '#1e7bf2' }} />
-						</button>
-						<button className="social-login">
-							<FontAwesomeIcon icon={faGoogle} style={{ color: '#ea4335' }} />
-						</button>
-					</div>
-
-					<span className="signup-text">
-						Already have an account?{" "}
-						<a id="login-form-toggler" onClick={toggleMode}>
-							Login here
-						</a>
-					</span>
-				</div>
-        </div>
-        </form>
+			</form>
 		</div>
 	);
 }
