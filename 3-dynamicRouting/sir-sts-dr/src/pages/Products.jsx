@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard";
 import CategoryChip from "../components/CategoryChip";
+import ProductCard from "../components/ProductCard";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -57,10 +57,10 @@ function Products() {
             />
             {categories.map((category) => (
               <CategoryChip
-                onClick={() => setChosenCategory(category.slug)}
-                isChosen={category.slug === chosenCategory}
-                category={category}
-                key={category.slug}
+                onClick  = {() => setChosenCategory(category.slug)}
+                isChosen = {category.slug === chosenCategory}
+                category = {category}
+                key      = {category.slug}
               />
             ))}
           </div>
